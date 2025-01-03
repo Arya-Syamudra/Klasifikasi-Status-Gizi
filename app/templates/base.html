@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <title>{% block title %}Sistem Gizi{% endblock %}</title>
 </head>
+
 <body>
     {% block header %}
     <header>
@@ -37,7 +39,8 @@
                         <p>Solusi untuk Memahami dan Menjaga Status Gizi dengan Mudah</p>
                     </div>
                 </div>
-                <p class="deskripsi-footer">Sistem Pendukung Penentuan Gizi Desa Lalatedzong.<br>Aplikasi ini dirancang untuk membantu masyarakat menjaga keseimbangan gizi<br>dengan cara yang mudah dan akurat.</p>
+                <p class="deskripsi-footer">Sistem Pendukung Penentuan Gizi Desa Lalatedzong.<br>Aplikasi ini dirancang
+                    untuk membantu masyarakat menjaga keseimbangan gizi<br>dengan cara yang mudah dan akurat.</p>
             </div>
 
             <!-- Garis Vertikal -->
@@ -56,8 +59,10 @@
                 </a>
             </div>
         </div>
-        <p class="footer-bottom">&copy; 2024 Desa Lalatedzong. Dikembangkan oleh KKN Reguler Gelombang XXIV Universitas Sulawesi Barat.</p>
+        <p class="footer-bottom">&copy; 2024 Desa Lalatedzong. Dikembangkan oleh KKN Reguler Gelombang XXIV Universitas
+            Sulawesi Barat.</p>
     </footer>
     {% endblock %}
 </body>
+
 </html>
