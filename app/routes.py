@@ -125,24 +125,43 @@ def classify_remaja(data):
 @bp.route('/hasil', methods=['POST'])
 def hasil():
     data = request.form.to_dict()
-    if 'bulan' in data and 'tahun' not in data:
-        data['bulan'] = int(data['bulan'])
-        data['berat_badan'] = float(data['berat_badan'])
-        data['tinggi_badan'] = float(data['tinggi_badan'])
-        result = classify(data)
-        kategori = "balita"
-    elif 'tahun' in data and 'bulan' in data:
-        data['tahun'] = int(data['tahun'])
-        data['bulan'] = int(data['bulan'])
-        data['berat_badan'] = float(data['berat_badan'])
-        data['tinggi_badan'] = float(data['tinggi_badan'])
-        result = classify_remaja(data)
-        kategori = "remaja"
-    else:
+
+    # Cek apakah data lengkap untuk kategori balita atau remaja
+    if 'jenis_kelamin' not in data or 'berat_badan' not in data or 'tinggi_badan' not in data:
         return "Data tidak lengkap. Pastikan semua field diisi."
 
+    # Kategori Balita: 'bulan' ada, 'tahun' tidak ada
+    if 'bulan' in data and 'tahun' not in data:
+        try:
+            # Convert data yang diperlukan
+            data['bulan'] = int(data['bulan'])
+            data['berat_badan'] = float(data['berat_badan'])
+            data['tinggi_badan'] = float(data['tinggi_badan'])
+            result = classify(data)
+            kategori = "balita"
+        except (ValueError, TypeError):
+            return "Input tidak valid. Silakan periksa kembali data Anda."
+
+    # Kategori Remaja: 'tahun' ada, set bulan default ke 6
+    elif 'tahun' in data:
+        try:
+            # Set bulan default untuk remaja
+            data['bulan'] = 6  # Defaultkan bulan menjadi 6
+            data['tahun'] = int(data['tahun'])
+            data['berat_badan'] = float(data['berat_badan'])
+            data['tinggi_badan'] = float(data['tinggi_badan'])
+            result = classify_remaja(data)
+            kategori = "remaja"
+        except (ValueError, TypeError):
+            return "Input tidak valid. Silakan periksa kembali data Anda."
+
+    else:
+        # Jika tidak ada bulan untuk balita atau tahun dan bulan untuk remaja
+        return "Data tidak lengkap. Pastikan semua field diisi."
+
+    # Render hasil untuk balita atau remaja
     return render_template(
-       'hasil.html', 
+        'hasil.html', 
         name=data['nama'], 
         gender=data['jenis_kelamin'],
         age=data.get('bulan', None),
