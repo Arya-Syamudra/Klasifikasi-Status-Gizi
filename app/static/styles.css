@@ -158,11 +158,21 @@ header {
     color: var(--text-color);
 }
 
-.tombol {
+.tombols {
     display: flex;
     flex-direction: row;
     gap: 48px;
     margin-top: 24px;
+}
+
+.tombol {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+}
+
+.info-tombol {
+    color: red;
 }
 
 button {
@@ -499,7 +509,7 @@ input[type="number"]::-webkit-outer-spin-button {
         font-size: 0.67rem;
     }
     
-    .tombol {
+    .tombols {
         display: flex;
         flex-direction: column;
         gap: 12px;
