@@ -34,12 +34,15 @@ def klasifikasi_imt_u(umur, berat_badan, tinggi_badan_cm, jenis_kelamin):
         return "Gizi Buruk"
     elif z_scores["-3 SD"] <= imt < z_scores["-2 SD"]:
         return "Gizi Kurang"
-    elif z_scores["-2 SD"] <= imt <= z_scores["+2 SD"]:
+    elif z_scores["-2 SD"] <= imt <= z_scores["+1 SD"]:
         return "Gizi Baik"
+    elif z_scores["+1 SD"] < imt <= z_scores["+2 SD"]:
+        return "Berisiko Gizi Lebih"
     elif z_scores["+2 SD"] < imt <= z_scores["+3 SD"]:
         return "Gizi Lebih"
     else:
         return "Obesitas"
+
 
 def klasifikasi_imt_u_remaja(tahun, bulan, berat_badan, tinggi_badan_cm, jenis_kelamin):
     if jenis_kelamin == "Laki-laki":
@@ -59,12 +62,13 @@ def klasifikasi_imt_u_remaja(tahun, bulan, berat_badan, tinggi_badan_cm, jenis_k
         return "Gizi Buruk"
     elif z_scores["-3 SD"] <= imt < z_scores["-2 SD"]:
         return "Gizi Kurang"
-    elif z_scores["-2 SD"] <= imt <= z_scores["+2 SD"]:
+    elif z_scores["-2 SD"] <= imt <= z_scores["+1 SD"]:
         return "Gizi Baik"
-    elif z_scores["+2 SD"] < imt <= z_scores["+3 SD"]:
+    elif z_scores["+1 SD"] < imt <= z_scores["+2 SD"]:
         return "Gizi Lebih"
     else:
         return "Obesitas"
+
 
 bp = Blueprint('main', __name__)
 
